@@ -1,0 +1,54 @@
+
+\subsubsection{Soundness, Consistency, and Maximality}
+
+\begin{definition}[consistent]
+  A set of \wff $\Sigma$ is consistent if $\Sigma\nvdash\alpha$ or $\Sigma\nvdash\neg\alpha$ for all \wff $\alpha$.
+\end{definition}
+
+\begin{claim}
+  A set of \wff $\Sigma$ is consistent iff $\exists\alpha, \Sigma\nvdash\alpha$.
+\end{claim}
+
+\begin{proof}
+
+  $\rightarrow$: pick any $\alpha$, either $\Sigma\nvdash\alpha$ or $\Sigma\vdash\alpha$, then there exists one that is not proved by $\Sigma$.
+
+$\leftarrow$: assume that for some $beta$, $\Sigma\nvdash\beta$, if the first definition is violated, then, for some $\alpha$, $\Sigma\vdash\alpha$ and $\Sigma\vdash\neg\alpha$, then $\Sigma\vdash\Sigma\cup\{\alpha,\neg\alpha\}\vdash\{\alpha,\neg\alpha\}$. $\{\alpha, \neg\alpha\}\vdash\beta$ for every $\beta$, contradicting the assumption.
+\end{proof}
+
+\begin{corollary}
+If $\Sigma\subseteq\Sigma'$, then if $\Sigma$ is consistent, then so does $\Sigma'$.
+\end{corollary}
+
+\begin{definition}[Soundness]
+If $\vdash\alpha$, then $\alpha$ is a tautology.
+\end{definition}
+
+\begin{corollary}
+$\nvdash P$, since $P$ is a propositional variable, which is not a tautology.
+\end{corollary}
+
+The universe $U$ (the set which includes everything) is the least consistent, since it contains everything. Therefore, for every $\alpha\in U$, $\neg\alpha\in U$, then $U$ can prove both.
+
+$\vdash$ is about syntax while $\models$ is about semantics. $\vdash$ shows that though the machine doesn't know anything, it can reach some result by axioms and modus ponens. $\models$ shows that the result is true in the real world given by human being's assignment of truth values.
+
+\begin{theorem}
+In a sound proof system, every satisfiable $\Sigma$ is consistent. 
+\end{theorem}
+
+\begin{proof}
+\bwoc, assume the satisfiable $\Sigma$ is inconsistent. Then, for some $\alpha$, both $\Sigma\vdash\alpha$ and $\Sigma\vdash\neg\alpha$. 
+If $\Sigma$ is satisfiable, then for some truth assignment $V$, $V$ satisfies all \wff in $\Sigma$. By soundness, $\Sigma\models\alpha$ and $\Sigma\models\neg\alpha$. So for that assignment $V$, we get $V(\alpha)=T$ and $V(\neg\alpha)=T$, violating the truth table of negation.
+\end{proof}
+
+\begin{theorem}[Extended Soundness]
+If $Sigma\vdash\alpha$, then $\Sigma\models\alpha$.
+\end{theorem}
+
+\begin{corollary}
+If any set of \wff is consistent, then, in particular $\emptyset$.
+\end{corollary}
+
+\begin{definition}[Monotonicity]
+  $\forall \Sigma, \Sigma', \alpha$, if $\Sigma\vdash\alpha, \Sigma\subseteq\Sigma'$, then $\Sigma'\vdash\alpha$.
+\end{definition}

@@ -1,0 +1,41 @@
+\documentclass[12pt,openany]{book}      % paper size is in preamble.sty
+
+%\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{misc/options}
+
+%%%%%%%%%% BOOK INFORMATION %%%%%%%%%%
+\newcommand{\authorname}{Haoyang Ma}
+\newcommand{\booktitle}{Logic for CS}
+\newcommand{\subtitle}{Notes for Ben's Course at UWaterloo\footnote{https://www.youtube.com/playlist?list=PLPW2keNyw-utXOOzLR-Wp1p0eE5LEtv3N}}
+\newcommand{\editionyear}{2024}
+\newcommand{\publisher}{Your Publisher}
+\newcommand{\isbn}{978-3-16-148410-0}
+\newcommand{\deff}{\noindent\textbf{Definition}}
+\newcommand{\bwoc}{\noindent\textit{b.w.o.c}}
+\newcommand{\st}{\noindent\textit{s.t.}}
+\newcommand{\wff}{\noindent\textit{w.f.f.}}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{claim}{Claim}
+\newtheorem{definition}{Definition}
+
+\title{\booktitle}
+\author{\authorname}
+
+\begin{document}
+\frontmatter
+\input{frontmatter/titlepage}
+\input{frontmatter/tocpage}
+
+\mainmatter
+\pagestyle{fancy}
+
+\input{content/Propositional.tex}
+
+\end{document}

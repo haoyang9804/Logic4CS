@@ -1,0 +1,48 @@
+\subsubsection{Consistency Continuation}
+
+\begin{theorem}[Deduction Theorem]
+  $\Sigma \cup \{ \alpha \} \vdash \beta$ iff $\Sigma \vdash \alpha \rightarrow \beta$.
+\end{theorem}
+
+
+\begin{theorem}
+  Any consistent set of \wff $\Sigma$ can be extended to $\Sigma$' \st $\Sigma' \supseteq \Sigma$ that is maximally consistent.
+\end{theorem}
+
+
+\begin{proof}
+We construct a sequence of set of \wff. $\Sigma_0 \subseteq \Sigma_1 \subseteq \Sigma_2 \subseteq \ldots \subseteq \Sigma_i \subseteq \Sigma_{i+1}$ \st 1) $\Sigma_0 = \Sigma$ and 2) For all $\Sigma_i$, $\Sigma_i$ is consistent, and 3) for fixed enumeration of all \wff., $\alpha_1, \alpha_2, \ldots, \alpha_n$, for all $i$, either $\Sigma_i \vdash \alpha$ or $\Sigma_i \vdash \neg \alpha$.
+
+Assume $\Sigma_i$ is defined and meets the requirements, let $\Sigma_{i+1}$ be $\Sigma_i$ if $\Sigma_i \vdash \neg \alpha_{i}$, otherwise $\Sigma_{i+1} = \Sigma_i \cup \{ \alpha_i \}$. 
+
+Now we want to prove if $\Sigma_i$ meets the requirement, then so will $\Sigma_{i+1}$.
+Requirement 1) is trivial. Requirement 2) and 3) are simultaneously proved by showing $\Sigma_{i+1} \nvdash \neg \alpha_i$ if $\Sigma_{i+1} = \Sigma_i \cup \{\alpha_i\}$, which is shown by the following claim.
+
+\begin{claim}
+  $\forall \Sigma, \alpha$, if $\Sigma \cup \{ \alpha \} \vdash \neg \alpha$, then $\Sigma \vdash \neg \alpha$. 
+\end{claim}
+\begin{proof}
+  To prove this claim, it suffices to show $\vdash (\alpha \rightarrow \neg \alpha) \rightarrow \neg \alpha$ based on deduction theorem, which is a tautology.
+\end{proof}
+
+Now we show the $\Sigma'=\cup_{i=1}^\infty \Sigma_i$ is maximally consistent.
+To prove it, it suffices to show that $\forall \alpha_i, i \in N$, $\Sigma' \vdash \alpha$ or $\Sigma' \vdash \neg \alpha$.
+By requirement 2), $\Sigma_i \vdash \alpha_i$ or $\Sigma_i \vdash \neg \alpha_i$. Now we are going to show $\Sigma' \vdash \alpha_i$ or $\Sigma' \vdash \neg \alpha_i$.
+
+\bwoc, suppose $\Sigma'$ is inconsistent. In this case, for some $\alpha$, $\Sigma'\vdash\alpha\ and\ \Sigma'\vdash\neg\alpha$. Let $\beta_1,\ldots\beta_k$ be the proof of $\alpha$ from $\Sigma'$ and $\gamma_1,\ldots,\gamma_l$ be the proof of $\neg\alpha$ from $\Sigma'$.
+
+Each $\beta_i$ that is an assumption from $\Sigma'$ belongs to some $\Sigma_{m_i}$, and each $\gamma_i$ that is an assumption from $\Sigma'$ belongs to some $\Sigma_{m_j}$.
+Since both formal proofs of $\alpha$ and of $\neg\alpha$ are finite, there is some $i^*$ that is bigger than all of these $m_i$'s and $m_j$'s. Therefore, for each $beta_i$ or $gemma_j$ that are used as assumptions, $\beta_i, \gamma_j \in \Sigma_{i^*}$. Now by monotonicity, $\Sigma_{i^*} \vdash \alpha$ and $\Sigma_{i^*} \vdash \neg \alpha$, which is a contradiction to requirement 2).
+
+\end{proof}
+
+\begin{theorem}
+  Every consistent $\Sigma$ is satisfiable.
+\end{theorem}
+
+
+\begin{proof}
+Let $\Sigma'$ be a maximally consistent set of \wff.s \st $\Sigma\subseteq\Sigma'$. Define a truth assignment $V_{\Sigma'}$ as follows: $V_{\Sigma'}(P_i) = T$ iff $\Sigma' \vdash P_i$ where $P_i$ is a propositional variable.
+Now extend it into  $V_{\Sigma'}(\alpha_i) = T$ iff $\Sigma' \vdash \alpha_i$.
+
+\end{proof}
