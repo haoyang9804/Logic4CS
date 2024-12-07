@@ -1,5 +1,3 @@
-\subsubsection{Consistency Continuation}
-
 \begin{theorem}[Deduction Theorem]
   $\Sigma \cup \{ \alpha \} \vdash \beta$ iff $\Sigma \vdash \alpha \rightarrow \beta$.
 \end{theorem}
@@ -37,12 +35,20 @@ Since both formal proofs of $\alpha$ and of $\neg\alpha$ are finite, there is so
 \end{proof}
 
 \begin{theorem}
-  Every consistent $\Sigma$ is satisfiable.
+  In a sound proof system, every consistent $\Sigma$ is satisfiable.
 \end{theorem}
 
 
 \begin{proof}
 Let $\Sigma'$ be a maximally consistent set of \wff.s \st $\Sigma\subseteq\Sigma'$. Define a truth assignment $V_{\Sigma'}$ as follows: $V_{\Sigma'}(P_i) = T$ iff $\Sigma' \vdash P_i$ where $P_i$ is a propositional variable.
 Now extend it into  $V_{\Sigma'}(\alpha_i) = T$ iff $\Sigma' \vdash \alpha_i$.
+
+\end{proof}
+
+
+\begin{proof}
+$\Sigma$ is satisfiable by all-truth assignemnt, so it's consistent.
+To show it's maximally consistent, we need to show for every $\alpha$, if $\Sigma\nvdash\alpha$, then $\Sigma\cup\{\alpha\}$ is inconsistent.
+If $\Sigma\nvdash\alpha$, then $\Sigma\nvDash\alpha$, then $\Sigma\cup\{\alpha\}$ is unsatisfiable, so it's inconsistent.
 
 \end{proof}
