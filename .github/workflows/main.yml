@@ -1,0 +1,20 @@
+name: sync_pdf
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: push
+        run: |
+          git clone git@github.com:haoyang9804/haoyang9804.github.io.git
+          cd haoayng9804.github.io
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          cp ../main.pdf notes/logic4cs.pdf
+          git add .
+          git commit -m "update logic4sc.pdf from Logic4CS repo"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/haoyang9804/haoyang9804.github.io master:master -f

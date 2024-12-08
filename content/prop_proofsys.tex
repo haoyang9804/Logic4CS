@@ -152,7 +152,7 @@ For every formula $\alpha$, $\overline{V}_{\Sigma'}(\alpha)=T$ iff $\Sigma'\vdas
 \end{claim}
 \begin{proof}
 By generalized induction on the set of all \wff:
-$I(\mathcal{P}, \{\rightarrow, \neg\})$ where $\mathcal{P}$ is the set of propositional variables, and $\{\rightarrow, \neg\}$ are the adequate connectives.
+$I(\mathcal{P}, \{\rightarrow, \neg\})$ where $\mathcal{P}$ is the set of propositional variables, and $\{\rightarrow, \neg\}$ are the adequate connectives (adequate means that the set of connectives are enough to map all truth assignment to the truth result).
 $I(\mathcal{P}, \{\rightarrow, \neg\})$ means that all \wff s that are built from $\mathcal{P}$ and $\{\rightarrow, \neg\}$.
 
 \textbf{Induction base}. $\alpha\in\mathcal{P}$.
@@ -197,5 +197,53 @@ To show it's maximally consistent, we need to show for every $\alpha$, if $\Sigm
 If $\Sigma\nvdash\alpha$, then $\Sigma\nvDash\alpha$, then $\Sigma\cup\{\alpha\}$ is unsatisfiable, so it's inconsistent.
 
 Based on the definition of the truth table, $V_{\Sigma}=T$.
+\end{proof}
+
+\begin{lemma}
+If $\Sigma\nvdash\alpha$ and $\Sigma$ is consistent, then $\Sigma\cup\{\neg\alpha\}$ is consistent.
+\end{lemma}
+
+\begin{proof}
+Suppose $\Sigma\cup\{\neg\alpha\}$ is inconsistent and $\Sigma$ is consistent, then $\exists\beta, \Sigma\cup\{\neg\alpha\}\vdash\beta$ and $\Sigma\cup\{\neg\alpha\}\vdash\neg\beta$.
+By deduction theorem, $\Sigma\vdash\neg\alpha\rightarrow\beta$ and $\Sigma\vdash\neg\alpha\rightarrow\neg\beta$.
+Since $\Sigma$ is consistent, $\Sigma\vdash\beta$ and $\Sigma\vdash\neg\beta$ do not hold together.
+
+Assume $\Sigma\vdash\beta$, from $\Sigma\vdash\neg\alpha\rightarrow\neg\beta$, we know $\Sigma\vdash\beta\rightarrow\alpha$, so $\Sigma\vdash\alpha$, contradicting the assumption that $\Sigma\nvdash\alpha$.
+
+Assume $\Sigma\nvdash\beta$, from $\Sigma\vdash\neg\alpha\rightarrow\beta$, we know $\Sigma\vdash\neg\beta\rightarrow\alpha$, so $\Sigma\vdash\alpha$, contradicting the assumption that $\Sigma\nvdash\alpha$.
+
+Since $\Sigma$ is not maximally consistent, so $\Sigma$ may not prove either $\beta$ or $\neg\beta$. In this situation, $\beta$ is $\alpha$ or $\neg\alpha$ and obviously $\Sigma\cup\{\neg\alpha\}$ can only prove either $\beta$ or $\neg\beta$, contraicting $\Sigma\cup\{\neg\alpha\}\vdash\beta$ and $\Sigma\cup\{\neg\alpha\}\vdash\neg\beta$.
 
 \end{proof}
+
+\begin{theorem} [Completeness]
+  For all $\alpha$ and any set of \wff s $\Sigma$, if $\Sigma$ is consistent and $\Sigma\vDash\alpha$, then $\Sigma\vdash\alpha$.
+\end{theorem}
+
+\begin{proof}
+Suppose $\Sigma\nvdash\alpha$, then $\Sigma\cup\{\neg\alpha\}$ is consistent.
+Therefore, $\Sigma\cup\{\neg\alpha\}$ is satisfiable, so $\Sigma\nvDash\alpha$.
+\end{proof}
+
+\begin{corollary}
+$\Sigma$ is maximally consistent, iff it is maximally satisfiable.
+\end{corollary}
+
+\begin{proof}
+
+$\rightarrow$:
+Since every $\alpha$, $\Sigma\vdash\alpha$ or $\Sigma\vdash\neg\alpha$, by soundness theorem, $\Sigma\vDash\alpha$ or $\Sigma\vDash\neg\alpha$.
+
+$\leftarrow$:
+Since for every $\alpha$, $\Sigma\vDash\alpha$ or $\Sigma\vDash\neg\alpha$, we get $\Sigma\vdash\alpha$ or $\Sigma\vdash\neg\alpha$ by completeness theorem.
+\end{proof}
+
+\begin{mdframed}
+
+Is there a polynomial algorithm to figure out a give $\alpha$ is satisfiable?
+
+Does there exist a proof $P_f$ of $\alpha$ such that $|P_f|<Poly(|\alpha|)$ where $Poly$ is a polynomial function.
+
+Does there exist any sound and complete proof systemw with the above property?
+
+\end{mdframed}
