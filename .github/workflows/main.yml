@@ -22,4 +22,4 @@ jobs:
           cp ../main.pdf ./notes/logic4cs.pdf
           git add .
           git commit -m "update logic4sc.pdf from Logic4CS repo"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/haoyang9804/haoyang9804.github.io master:master -f
+          git push https://x-access-token:${{ secrets.HOMEPAGE }}@github.com/haoyang9804/haoyang9804.github.io master:master -f
