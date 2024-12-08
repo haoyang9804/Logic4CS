@@ -11,7 +11,7 @@ jobs:
       - name: push
         run: |
           git clone https://github.com/haoyang9804/haoyang9804.github.io.git
-          cd haoayng9804.github.io
+          cd haoyang9804.github.io
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           cp ../main.pdf notes/logic4cs.pdf
