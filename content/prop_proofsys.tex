@@ -1,4 +1,201 @@
 \subsection{Proof System}
 
-\input{content/11.tex}
-\input{content/12.tex}
+
+\begin{definition}[consistent]
+  A set of \wff $\Sigma$ is consistent if $\Sigma\vdash\alpha$ and $\Sigma\vdash\neg\alpha$ does not hold together.
+\end{definition}
+
+\begin{mdframed}
+Another definition of consistency is that $\Sigma\nvdash\perp$ where $\perp$ is a contradiction\footnote{https://planetmath.org/consistent}.
+\end{mdframed}
+
+\begin{claim}
+  A set of \wff $\Sigma$ is consistent iff $\exists\alpha, \Sigma\nvdash\alpha$.
+\end{claim}
+
+\begin{proof}
+
+  $\rightarrow$: pick any $\alpha$, either $\Sigma\nvdash\alpha$ or $\Sigma\vdash\alpha$, then there exists one that is not proved by $\Sigma$.
+
+$\leftarrow$: assume that for some $beta$, $\Sigma\nvdash\beta$, if the first definition is violated, then, for some $\alpha$, $\Sigma\vdash\alpha$ and $\Sigma\vdash\neg\alpha$, then $\Sigma\vdash\Sigma\cup\{\alpha,\neg\alpha\}\vdash\{\alpha,\neg\alpha\}$. $\{\alpha, \neg\alpha\}\vdash\beta$ for every $\beta$, contradicting the assumption.
+\end{proof}
+
+\begin{corollary}
+If $\Sigma\subseteq\Sigma'$, then if $\Sigma$ is consistent, then so does $\Sigma'$.
+\end{corollary}
+
+\begin{definition}[Soundness]
+If $\vdash\alpha$, then $\alpha$ is a tautology.
+\begin{mdframed}
+In another word, every theorem is a tautology.
+\end{mdframed}
+\end{definition}
+
+\begin{corollary}
+$\nvdash P$, since $P$ is a propositional variable, which is not a tautology.
+\end{corollary}
+
+The universe $U$ (the set which includes everything) is the least consistent, since it contains everything. Therefore, for every $\alpha\in U$, $\neg\alpha\in U$, $U$ can prove both. It has the most unsteady stance:).
+
+$\vdash$ is about syntax while $\vDash$ is about semantics. $\vdash$ shows that though the machine doesn't know anything, it can reach some result by axioms and modus ponens. $\vDash$ shows that the result is true in the real world given by human being's assignment of truth values.
+
+\begin{theorem}
+In a sound proof system, every satisfiable $\Sigma$ is consistent. 
+\end{theorem}
+
+\begin{proof}
+\bwoc, assume the satisfiable $\Sigma$ is inconsistent. Then, for some $\alpha$, both $\Sigma\vdash\alpha$ and $\Sigma\vdash\neg\alpha$. 
+If $\Sigma$ is satisfiable, then for some truth assignment $V$, $V$ satisfies all \wff in $\Sigma$. By soundness, $\Sigma\vDash\alpha$ and $\Sigma\vDash\neg\alpha$. So for that assignment $V$, we get $V(\alpha)=T$ and $V(\neg\alpha)=T$, violating the truth table of negation.
+\end{proof}
+
+The above theorem builds a bridge from semantic to syntax.
+
+\begin{theorem}[Extended Soundness]
+If $Sigma\vdash\alpha$, then $\Sigma\vDash\alpha$.
+\end{theorem}
+
+\begin{corollary}
+If any set of \wff is consistent, then, in particular $\emptyset$.
+\end{corollary}
+
+
+\begin{definition}[Maximally Consistent]
+We say that $\Sigma$ is maximally consistent if $\Sigma$ is consistent, but, for every $\alpha$, either $\Sigma\vdash\alpha$ or $\Sigma\cup\{\alpha\}$ is inconsistent.
+\end{definition}
+
+\begin{mdframed}
+Consistency tells us that if $\Sigma\vdash\alpha$, then $\Sigma\nvdash\alpha$ doesn't hold. But if $\Sigma\nvdash\alpha$, then we can't say $\Sigma\vdash\alpha$ holds. Consistency only ensures no contradiction.
+
+Maximally consistency tells us that if $\Sigma\nvdash\alpha$, then $\Sigma\vdash\alpha$ must hold. The maximality nature ensures that the negation of every nonprovable \wff is provable.
+\end{mdframed}
+
+\begin{mdframed}
+\begin{example}
+Let $\Sigma\equiv\{P_1\}$ over the variables $P_1, P_2, \ldots$.
+\begin{claim}
+$\{P_1\}$ is consistent since it's satisfiable.
+\end{claim}
+\begin{claim}
+$\{P_1\}$ is not maximally consistent
+\end{claim}
+\begin{proof}
+  It suffices to show that $\{P_1\}\nvdash P_3$ and $\{P_1, P_3\}$ is consistent.
+
+  By soundness, it suffices to show that $\{P_1\}\vDash P_3$. Just find some truth assignment that $V$ \st $V(P_1)=T$ and $V(P_3)=F$. So $\{P_1\}\nvdash P_3$.
+  
+  Since $\{P_1, P_3\}$ is satisfiable, so it's consistent.
+\end{proof}
+\end{example}
+\end{mdframed}
+
+\begin{lemma}
+For every consistent $\Sigma$, there exists a maximally consistent $\Sigma' \supseteq \Sigma$.
+\end{lemma}
+
+\begin{proof}
+Let $\{\alpha_1, \ldots, \alpha_i, \alpha_{i+1}, \ldots\}$ is a set of \wff over $\{P_1,P_2,\ldots,P_i,\ldots\}$
+\end{proof}
+
+\begin{definition}[Monotonicity]
+  $\forall \Sigma, \Sigma', \alpha$, if $\Sigma\vdash\alpha, \Sigma\subseteq\Sigma'$, then $\Sigma'\vdash\alpha$.
+\end{definition}
+
+\begin{theorem}[Deduction Theorem]
+  $\Sigma \cup \{ \alpha \} \vdash \beta$ iff $\Sigma \vdash \alpha \rightarrow \beta$.
+\end{theorem}
+
+
+\begin{theorem}
+  Any consistent set of \wff $\Sigma$ can be extended to $\Sigma$' \st $\Sigma' \supseteq \Sigma$ that is maximally consistent.
+\end{theorem}
+
+
+\begin{proof}
+We construct a sequence of set of \wff. $\Sigma_0 \subseteq \Sigma_1 \subseteq \Sigma_2 \subseteq \ldots \subseteq \Sigma_i \subseteq \Sigma_{i+1}$ \st 1) $\Sigma_0 = \Sigma$ and 2) For all $\Sigma_i$, $\Sigma_i$ is consistent, and 3) for fixed enumeration of all \wff., $\alpha_1, \alpha_2, \ldots, \alpha_n$, for all $i$, either $\Sigma_i \vdash \alpha$ or $\Sigma_i \vdash \neg \alpha$.
+
+Assume $\Sigma_i$ is defined and meets the requirements, let $\Sigma_{i+1}$ be $\Sigma_i$ if $\Sigma_i \vdash \neg \alpha_{i}$, otherwise $\Sigma_{i+1} = \Sigma_i \cup \{ \alpha_i \}$. 
+
+Now we want to prove if $\Sigma_i$ meets the requirement, then so will $\Sigma_{i+1}$.
+Requirement 1) is trivial. Requirement 2) and 3) are simultaneously proved by showing $\Sigma_{i+1} \nvdash \neg \alpha_i$ if $\Sigma_{i+1} = \Sigma_i \cup \{\alpha_i\}$, which is shown by the following claim.
+
+\begin{claim}
+  $\forall \Sigma, \alpha$, if $\Sigma \cup \{ \alpha \} \vdash \neg \alpha$, then $\Sigma \vdash \neg \alpha$. 
+\end{claim}
+\begin{proof}
+  To prove this claim, it suffices to show $\vdash (\alpha \rightarrow \neg \alpha) \rightarrow \neg \alpha$ based on deduction theorem, which is a tautology.
+\end{proof}
+
+Now we show the $\Sigma'=\cup_{i=1}^\infty \Sigma_i$ is maximally consistent.
+To prove it, it suffices to show that $\forall \alpha_i, i \in N$, $\Sigma' \vdash \alpha$ or $\Sigma' \vdash \neg \alpha$.
+By requirement 2), $\Sigma_i \vdash \alpha_i$ or $\Sigma_i \vdash \neg \alpha_i$. Now we are going to show $\Sigma' \vdash \alpha_i$ or $\Sigma' \vdash \neg \alpha_i$.
+
+\bwoc, suppose $\Sigma'$ is inconsistent. In this case, for some $\alpha$, $\Sigma'\vdash\alpha\ and\ \Sigma'\vdash\neg\alpha$. Let $\beta_1,\ldots\beta_k$ be the proof of $\alpha$ from $\Sigma'$ and $\gamma_1,\ldots,\gamma_l$ be the proof of $\neg\alpha$ from $\Sigma'$.
+
+Each $\beta_i$ that is an assumption from $\Sigma'$ belongs to some $\Sigma_{m_i}$, and each $\gamma_i$ that is an assumption from $\Sigma'$ belongs to some $\Sigma_{m_j}$.
+Since both formal proofs of $\alpha$ and of $\neg\alpha$ are finite, there is some $i^*$ that is bigger than all of these $m_i$'s and $m_j$'s. Therefore, for each $beta_i$ or $gemma_j$ that are used as assumptions, $\beta_i, \gamma_j \in \Sigma_{i^*}$. Now by monotonicity, $\Sigma_{i^*} \vdash \alpha$ and $\Sigma_{i^*} \vdash \neg \alpha$, which is a contradiction to requirement 2).
+
+\end{proof}
+
+\begin{theorem}
+  In a sound proof system, every consistent $\Sigma$ is satisfiable.
+\begin{mdframed}
+Also called the completeness theorem.
+\end{mdframed}
+\end{theorem}
+
+
+\begin{proof}
+Let $\Sigma'$ be a maximally consistent set of \wff.s \st $\Sigma\subseteq\Sigma'$. Define a truth assignment $V_{\Sigma'}$ as follows: $V_{\Sigma'}(P_i) = T$ iff $\Sigma' \vdash P_i$ where $P_i$ is a propositional variable.
+Now extend it into  $V_{\Sigma'}(\alpha_i) = T$ iff $\Sigma' \vdash \alpha_i$.
+\begin{claim}
+For every formula $\alpha$, $\overline{V}_{\Sigma'}(\alpha)=T$ iff $\Sigma'\vdash\alpha$, where $\overline{V}_{\Sigma'}$ is the extension of $V_{\Sigma'}$ in the infinite set of \wff, and $\overline{V}_{\Sigma'}$ is the truth assignment that satisfies $\Sigma'$.
+\end{claim}
+\begin{proof}
+By generalized induction on the set of all \wff:
+$I(\mathcal{P}, \{\rightarrow, \neg\})$ where $\mathcal{P}$ is the set of propositional variables, and $\{\rightarrow, \neg\}$ are the adequate connectives.
+$I(\mathcal{P}, \{\rightarrow, \neg\})$ means that all \wff s that are built from $\mathcal{P}$ and $\{\rightarrow, \neg\}$.
+
+\textbf{Induction base}. $\alpha\in\mathcal{P}$.
+
+$\leftarrow$: $\overline{V}_{\Sigma'}(\alpha)=T$, then $\Sigma'\vdash\alpha$ by definition of $V_{\Sigma'}$.
+
+$\rightarrow$: Suppose $\Sigma'\nvdash\alpha$, then $\overline{V}_{\Sigma'}(\alpha)=F$ still by the definition.
+
+\begin{mdframed}
+Remember the relation between truth assignment and the proof symbol. $\Sigma\vdash\alpha$ means that for every truth assignment $V$ \st $V(\Sigma)=T$, then $V(\alpha)=T$, which can be simplified as $V_{\Sigma}(\alpha)=T$.
+\end{mdframed}
+
+\textbf{Induction step}. Assume the claim holds for $\alpha$ and for $\beta$, we need to show that for $\neg\alpha$ and $\alpha\rightarrow\beta$.
+
+$\neg\alpha$:
+
+$\leftarrow$:
+If $\Sigma'\vdash\neg\alpha$, by the consistency, $\Sigma'\nvdash\alpha$. So by the induction hypothesis, $\overline{V}_{\Sigma'}(\alpha)=F$, so by the truth table, $\overline{V}_{\Sigma'}(\neg\alpha)=T$.
+
+$\rightarrow$:
+Assume $\Sigma'\nvdash\neg\alpha$, then by its maximality, $\Sigma'\vdash\alpha$. So by the induction hypothesis, $\overline{V}_{\Sigma'}(\alpha)=T$, so by the truth table, $\overline{V}_{\Sigma'}(\neg\alpha)=F$.
+
+$\alpha\rightarrow\beta$:
+
+$\leftarrow$: $\Sigma'\nvdash(\alpha\rightarrow\beta)$,
+Since $\vdash\beta\rightarrow(\alpha\rightarrow\beta)$, $\Sigma'\nvdash\beta$. 
+By the induction hypothesis, $\overline{V}_{\Sigma'}(\beta)=F$.
+Now we need to show that $\overline{V}_{\Sigma'}(\alpha)=T$. 
+\bwoc, assume $\overline{V}_{\Sigma'}(\alpha)=F$.
+By the induction hypothesis, $\Sigma\nvdash\alpha$, and by the maximality of $\Sigma'$, $\Sigma'\vdash\neg\alpha$. And by $\vdash\neg\alpha\rightarrow(\alpha\rightarrow\beta)$, $\Sigma'\vdash(\alpha\rightarrow\beta)$, which contradicts $\Sigma'\nvdash(\alpha\rightarrow\beta)$. Therefore, $\overline{V}_{\Sigma'}(\alpha)=F$, so this case is proved.
+
+$\rightarrow$: $\Sigma'\vdash(\alpha\rightarrow\beta)$.
+Assume $\Sigma'\vdash\alpha$, in which case $\Sigma'\vdash\beta$ by modus ponens. Using the induction hypothesis, $\overline{V}_{\Sigma'}(\alpha)=T$ and $\overline{V}_{\Sigma'}(\beta)=T$, so $\overline{V}_{\Sigma'}(\alpha\rightarrow\beta)=T$.
+Otherwise, $\Sigma'\nvdash\alpha$, so by the induction hypothesis, $\overline{V}_{\Sigma'}(\alpha)=F$, so by truth table, $\overline{V}_{\Sigma'}(\alpha\rightarrow\beta)=T$.
+\end{proof}
+\end{proof}
+
+
+\begin{proof}
+$\Sigma$ is satisfiable by all-truth assignemnt, so it's consistent.
+To show it's maximally consistent, we need to show for every $\alpha$, if $\Sigma\nvdash\alpha$, then $\Sigma\cup\{\alpha\}$ is inconsistent.
+If $\Sigma\nvdash\alpha$, then $\Sigma\nvDash\alpha$, then $\Sigma\cup\{\alpha\}$ is unsatisfiable, so it's inconsistent.
+
+Based on the definition of the truth table, $V_{\Sigma}=T$.
+
+\end{proof}
