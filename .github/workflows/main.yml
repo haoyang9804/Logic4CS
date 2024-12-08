@@ -16,6 +16,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           ls
+          if ! [ -d "./notes" ]; then
+            mkdir notes
+          fi
           cp ../main.pdf ./notes/logic4cs.pdf
           git add .
           git commit -m "update logic4sc.pdf from Logic4CS repo"
